@@ -52,7 +52,18 @@ namespace Business.Constants
         public static string CarImageUpdated = "Resim Güncellendi.";
         public static string CarImagesListed = "Resimler Listelendi.";
 
+        public static string FindexAdded = "Findekx Eklendi.";
+        public static string FindexUpdated = "Findex Güncellendi.";
+        public static string FindexDeleted = "Findekx Silindi.";
 
+        public static string PaymentListed = "Ödemeler Listelendi.";
+        public static string PaymentAdded = "Ödeme Eklendi.";
+        public static object PaymentRecevid = "Ödeme Alındı";
+
+        public static string CreditCardAdded = "Kredi kartı Eklendi";
+        public static string CreditCardDeleted = "Kredi kartı Silindi";
+        public static string CreditCardListed = "Kredi kartları Listelendi";
+        public static string CreditCardUpdated = "Kredi kartı Güncellendi";
 
         //Business Rule Messages
         public static string CarCheckImageLimited = "Bir araca en fazla 5 resim yükliyebilirsin.";
@@ -64,5 +75,8 @@ namespace Business.Constants
         public static string UserAlreadyExists = "Kullanıcı zaten var";
         public static string UserRegistered = "Kullanıcı başarıyla kayıt oldu.";
         public static string AuthorizationDenied = "Yetkilendirme reddedildi.";
+
+
+       
     }
 }
