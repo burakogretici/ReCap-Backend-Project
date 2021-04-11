@@ -10,7 +10,7 @@ namespace Business.Abstract
 {
     public interface ICreditCardService
     {
-        IResult Add(CreditCard creditCard);
+        IResult Add(CreditCard creditCard, Boolean save);
         IResult Delete(CreditCard creditCard);
         IResult Update(CreditCard creditCard);
         IDataResult<List<CreditCard>> GetAll();

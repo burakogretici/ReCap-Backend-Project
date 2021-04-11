@@ -21,7 +21,7 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
         
-        [SecuredOperation("color.add,admin")]
+        //[SecuredOperation("color.add,admin")]
         [CacheRemoveAspect("IColorService.Get")]
         public IResult Add(Color color)
         {
@@ -30,6 +30,7 @@ namespace Business.Concrete
 
         }
 
+        [CacheRemoveAspect("IColorService.Get")]
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);

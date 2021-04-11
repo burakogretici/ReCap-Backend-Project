@@ -26,7 +26,7 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
        
-        [SecuredOperation("rental.add,admin")]
+       //[SecuredOperation("rental.add,admin")]
         [ValidationAspect(typeof(RentalValidator))]
         [CacheRemoveAspect("IRentalService.Get")]
         public IResult Add(Rental rental)
@@ -41,27 +41,32 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(RentalValidator))]
+        [CacheRemoveAspect("IRentalService.Get")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
         }
+      
         [PerformanceAspect(5)]
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),Messages.RentalListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Rental>> GetAllByCarId(int id)
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.CarId == id));
         }
 
+        [CacheAspect]
         public IDataResult<List<Rental>> GetAllByCustomerId(int id)
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.CustomerId == id));
         }
 
+        [CacheAspect]
         public IDataResult<Rental> GetById(int rentalId)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == rentalId));

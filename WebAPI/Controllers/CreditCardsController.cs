@@ -53,9 +53,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(CreditCard creditCard)
+        public IActionResult Add(CreditCard creditCard, [FromQuery] Boolean save)
         {
-            var result = _creditCardService.Add(creditCard);
+            var result = _creditCardService.Add(creditCard,save);
             if (result.Success)
             {
                 return Ok(result);

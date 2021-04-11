@@ -38,7 +38,7 @@ namespace WebAPI
 
             services.AddCors();
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen (c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });

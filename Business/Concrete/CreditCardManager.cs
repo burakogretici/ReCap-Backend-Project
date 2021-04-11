@@ -8,6 +8,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -25,10 +26,15 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CreditCardValidator))]
         [CacheRemoveAspect("ICreditCardService.Get")]
-        public IResult Add(CreditCard creditCard)
+        public IResult Add(CreditCard creditCard,Boolean save)
         {
-            _creditCardDal.Add(creditCard);
-            return new SuccessResult(Messages.CreditCardAdded);
+            if (save == true)
+            {
+                var result = BusinessRules.Run(CheckIfCreditCardNotRegistered(creditCard));
+                if (result == null)
+                    _creditCardDal.Add(creditCard);
+            }
+            return new SuccessResult();
         }
 
         [CacheRemoveAspect("ICreditCardService.Get")]
@@ -65,6 +71,16 @@ namespace Business.Concrete
         {
             _creditCardDal.Update(creditCard);
             return new SuccessResult(Messages.CreditCardUpdated);
+        }
+        private IResult CheckIfCreditCardNotRegistered(CreditCard creditCard)
+        {
+            var result = _creditCardDal.Get(c => c.CreditCardNumber == creditCard.CreditCardNumber);
+
+            if (result == null)
+            {
+                return new SuccessResult();
+            }
+            return new ErrorResult("Kredi Kartı zaten mevcut");
         }
     }
 }
