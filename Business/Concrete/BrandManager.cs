@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Core.Aspects.Autofac.Caching;
+using Core.Utilities.Business;
 
 
 namespace Business.Concrete
@@ -24,15 +25,14 @@ namespace Business.Concrete
         [CacheRemoveAspect("IBrandService.Get")]
         public IResult Add(Brand brand)
         {
-            if (brand.BrandName.Length>=2)
+          IResult result = BusinessRules.Run(BrandAlreadyExists(brand.BrandName));
+            if (result != null)
             {
-                return new SuccessResult(Messages.BrandAdded);
+                return result;
             }
-            else
-            {
-                return new ErrorResult(Messages.BrandNameInvalid);
-            }
-            
+            _brandDal.Add(brand);
+            return new SuccessResult(Messages.BrandAdded);
+
         }
 
         [CacheRemoveAspect("IBrandService.Get")]
@@ -60,6 +60,16 @@ namespace Business.Concrete
         {
             _brandDal.Update(brand);
             return new Result(true, Messages.BrandUpdated);
+        }
+
+        private IResult BrandAlreadyExists(string brandName)
+        {
+            var result = _brandDal.GetAll(b => b.BrandName == brandName).Any();
+            if (result == true)
+            {
+                return new ErrorResult(Messages.BrandAlreadyExists);
+            }
+            return new SuccessResult();
         }
     }
 }

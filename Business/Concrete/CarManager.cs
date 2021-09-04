@@ -33,7 +33,7 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
-            IResult result = BusinessRules.Run(CheckIfProductNameExsist(car.CarName));
+            IResult result = BusinessRules.Run(CheckIfProductNameExsits(car.CarName));
             if (result != null)
             {
                 return result;
@@ -100,11 +100,10 @@ namespace Business.Concrete
 
         }
        
-        private IResult CheckIfProductNameExsist(string carName)
+        private IResult CheckIfProductNameExsits(string carName)
         {
-
-            var result = _carDal.GetAll(c => c.CarName == carName).Any();
-            if (result == true)
+            var result = _carDal.GetAll(c => c.CarName == carName);
+            if (result == null)
             {
                 return new ErrorResult(Messages.ProductAlreadyExists);
             }
