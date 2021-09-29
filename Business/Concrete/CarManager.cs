@@ -102,8 +102,8 @@ namespace Business.Concrete
        
         private IResult CheckIfProductNameExsits(string carName)
         {
-            var result = _carDal.GetAll(c => c.CarName == carName);
-            if (result == null)
+            var result = _carDal.GetAll(c => c.CarName == carName).Any();
+            if (result == true)
             {
                 return new ErrorResult(Messages.ProductAlreadyExists);
             }
