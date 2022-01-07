@@ -28,6 +28,7 @@ namespace Business.Constants
         public static string ColorListed = "Renkler Listelendi";
         public static string ColorDeleted = "Renk Silindi";
         public static string ColorUpdated = "Renk Güncellendi";
+        public static string ColorAlreadyExists = "Bu renk zaten mevcut";
 
 
         public static string CustomerAdded = "Müşteri eklendi.";
