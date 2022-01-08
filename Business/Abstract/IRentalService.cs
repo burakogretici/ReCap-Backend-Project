@@ -5,19 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Business.Abstract;
 
 namespace Business.Abstract
 {
-    public interface IRentalService
+    public interface IRentalService : IBaseService<Rental>
     {
-        IDataResult<List<Rental>> GetAll();
         IDataResult<List<Rental>> GetAllByCarId(int id);
         IDataResult<List<Rental>> GetAllByCustomerId(int id);
-        IDataResult<Rental> GetById(int rentalId);
-
-
-        IResult Add(Rental rental);
-        IResult Delete(Rental rental);
-        IResult Update(Rental rental);
+        
     }
 }
