@@ -32,7 +32,19 @@ namespace Business.Concrete
             return new SuccessResult(Messages.PaymentAdded);
         }
 
-        
+        public IResult Delete(Payment payment)
+        {
+            _paymentDal.Delete(payment);
+           return new SuccessResult(Messages.PaymentDeleted);
+        }
+
+        public IResult Update(Payment payment)
+        {
+            _paymentDal.Delete(payment);
+            return new SuccessResult(Messages.PaymentUpdated);
+        }
+
+
         [CacheAspect]
         public IDataResult<List<Payment>> GetAll()
         {
