@@ -61,6 +61,8 @@ namespace Business.Constants
         public static string PaymentListed = "Ödemeler Listelendi.";
         public static string PaymentAdded = "Ödeme Eklendi.";
         public static object PaymentRecevid = "Ödeme Alındı";
+        public static string PaymentDeleted = "Ödeme Silindi.";
+        public static string PaymentUpdated = "Ödeme Güncellendi.";
 
         public static string CreditCardAdded = "Kredi kartı Eklendi";
         public static string CreditCardDeleted = "Kredi kartı Silindi";
@@ -79,6 +81,5 @@ namespace Business.Constants
         public static string AuthorizationDenied = "Yetkilendirme reddedildi.";
 
 
-       
     }
 }

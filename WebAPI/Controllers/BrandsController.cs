@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
 namespace WebAPI.Controllers
@@ -12,7 +14,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class BrandsController : ControllerBase
     {
-        IBrandService _brandService;
+        private IBrandService _brandService;
 
         public BrandsController(IBrandService brandService)
         {
@@ -56,7 +58,6 @@ namespace WebAPI.Controllers
 
         [HttpPost("update")]
         public IActionResult Update(Brand brand)
-
         {
             var result = _brandService.Update(brand);
             if (result.Success)
